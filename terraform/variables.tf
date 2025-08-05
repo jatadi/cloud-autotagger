@@ -11,25 +11,25 @@ variable "environment" {
 }
 
 variable "bucket_name" {
-  description = "Name of the S3 bucket for file uploads"
+  description = "Base name for the S3 bucket"
   type        = string
-  default     = "autotagger-uploads"  # Will be suffixed with random string
+  default     = "autotagger-uploads"
 }
 
 variable "lambda_runtime" {
   description = "Runtime for Lambda function"
   type        = string
-  default     = "python3.9"
+  default     = "python3.11"
 }
 
 variable "lambda_timeout" {
-  description = "Timeout for Lambda function (in seconds)"
+  description = "Timeout for Lambda function in seconds"
   type        = number
   default     = 30
 }
 
 variable "lambda_memory" {
-  description = "Memory allocation for Lambda function (in MB)"
+  description = "Memory allocation for Lambda function in MB"
   type        = number
   default     = 128
 } 

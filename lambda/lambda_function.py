@@ -2,7 +2,7 @@ import json
 import csv
 import os
 import boto3
-from datetime import datetime, UTC
+from datetime import datetime, timezone
 import logging
 from io import StringIO
 
@@ -28,7 +28,7 @@ def extract_metadata(bucket, key, content_type):
         response = s3_client.head_object(Bucket=bucket, Key=key)
         metadata = {
             'file_id': key,
-            'timestamp': datetime.now(UTC).isoformat(),
+            'timestamp': datetime.now(timezone.utc).isoformat(),
             'size': response['ContentLength'],
             'last_modified': response['LastModified'].isoformat(),
             'content_type': content_type,
