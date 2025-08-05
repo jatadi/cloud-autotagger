@@ -10,8 +10,9 @@ from io import StringIO
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-# Initialize AWS clients
-s3_client = boto3.client('s3')
+def get_s3_client():
+    """Get S3 client."""
+    return boto3.client('s3', region_name=os.environ.get('AWS_DEFAULT_REGION', 'us-east-1'))
 
 def get_dynamodb_table():
     """Get DynamoDB table resource."""
@@ -22,6 +23,7 @@ def get_dynamodb_table():
 def extract_metadata(bucket, key, content_type):
     """Extract metadata from the file in S3."""
     try:
+        s3_client = get_s3_client()
         # Get object metadata from S3
         response = s3_client.head_object(Bucket=bucket, Key=key)
         metadata = {
